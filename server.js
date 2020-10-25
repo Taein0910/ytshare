@@ -8,7 +8,7 @@ var socket = require('socket.io');
 var io = socket(server);
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://hayeong:<password>@ha0.hnyx8.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://dbuser:yti050910@cluster0.u2uiy.mongodb.net/<dbname>?retryWrites=true&w=majority', {
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 }).then(() => console.log('MongoDB connected...'))
 .catch(error => console.log(error))
