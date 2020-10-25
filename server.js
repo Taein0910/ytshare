@@ -13,7 +13,24 @@ mongoose.connect('mongodb+srv://dbuser:yti050910@cluster0.u2uiy.mongodb.net/<dbn
 }).then(() => console.log('MongoDB connected...'))
 .catch(error => console.log(error))
 
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+  console.log('DB가 열렸습니다.');
+});
+
+var ChatSchema = mongoose.Schema({
+    message: String
+  });
  
+  ChatSchema.methods.speak = function () {
+    var message = this.message;
+    if (message != '') {
+      console.log(message);
+    } else {
+    }
+  };
+
+
 var port = 5000;
 var socketList = [];
  
@@ -31,6 +48,11 @@ io.on('connection', function(socket) {
             console.log(item.id);
             if (item != socket) {
                 item.emit('SEND', msg);
+                var fluffy = new Kitten({ message: msg});
+                fluffy.save(function (err, fluffy) {
+                    if (err) return console.error(err);
+                    fluffy.speak();
+                  });
             }
         });
     });
